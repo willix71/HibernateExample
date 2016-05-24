@@ -2,15 +2,16 @@ package com.mkyong.stock;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -27,11 +28,8 @@ public class Role implements java.io.Serializable {
 	@Column(name = "ROLE_NAME", unique = true, nullable = false, length = 10)
 	private String name;
 
-	@ManyToMany
-	@JoinTable(name = "stock_category_role", schema = "mkyongdb", 
-		joinColumns={@JoinColumn(name="ROLE_ID")}, 
-		inverseJoinColumns={@JoinColumn(name="STOCK_CATEGORY_ID")})
-	private List<StockCategory> stockCatgeory;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.role", cascade=CascadeType.ALL)
+	private List<StockCategoryRole> stockCategoryRoles = new ArrayList<StockCategoryRole>(0);
 	
 	public Integer getRoleId() {
 		return roleId;
@@ -49,11 +47,12 @@ public class Role implements java.io.Serializable {
 		this.name = name;
 	}
 
-	public List<StockCategory> getStockCatgeory() {
-		return stockCatgeory;
+	public List<StockCategoryRole> getStockCategoryRoles() {
+		return stockCategoryRoles;
 	}
 
-	public void setStockCatgeory(List<StockCategory> stockCatgeory) {
-		this.stockCatgeory = stockCatgeory;
+	public void setStockCategoryRoles(List<StockCategoryRole> stockCategoryRoles) {
+		this.stockCategoryRoles = stockCategoryRoles;
 	}
+
 }

@@ -16,7 +16,7 @@
 		<property name="format_sql">true</property>
     	<mapping class="com.mkyong.stock.Stock" />
     	<mapping class="com.mkyong.stock.Category" />
-    	<mapping class="com.mkyong.stock.StockCategory" />
     	<mapping class="com.mkyong.stock.Role" />
+    	<mapping class="com.mkyong.stock.StockCategoryRole" />
 	</session-factory>
 </hibernate-configuration>

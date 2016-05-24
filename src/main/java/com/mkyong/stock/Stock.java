@@ -3,7 +3,9 @@ package com.mkyong.stock;
 import static javax.persistence.GenerationType.IDENTITY;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -34,8 +36,8 @@ public class Stock implements java.io.Serializable {
 	@Column(name = "STOCK_NAME", unique = true, nullable = false, length = 20)
 	private String stockName;
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "stock", cascade=CascadeType.ALL)
-	private List<StockCategory> stockCategories = new ArrayList<StockCategory>(0);
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.stock", cascade=CascadeType.ALL)
+	private List<StockCategoryRole> stockCategoryRoles = new ArrayList<StockCategoryRole>(0);
 
 	public Stock() {
 	}
@@ -46,10 +48,10 @@ public class Stock implements java.io.Serializable {
 	}
 
 	public Stock(String stockCode, String stockName,
-			List<StockCategory> stockCategories) {
+			List<StockCategoryRole> stockCategoryRoles) {
 		this.stockCode = stockCode;
 		this.stockName = stockName;
-		this.stockCategories = stockCategories;
+		this.stockCategoryRoles = stockCategoryRoles;
 	}
 
 	public Integer getStockId() {
@@ -76,11 +78,19 @@ public class Stock implements java.io.Serializable {
 		this.stockName = stockName;
 	}
 
-	public List<StockCategory> getStockCategories() {
-		return this.stockCategories;
+	public List<StockCategoryRole> getStockCategoryRoles() {
+		return stockCategoryRoles;
 	}
 
-	public void setStockCategories(List<StockCategory> stockCategories) {
-		this.stockCategories = stockCategories;
+	public void setStockCategoryRoles(List<StockCategoryRole> stockCategoryRoles) {
+		this.stockCategoryRoles = stockCategoryRoles;
+	}
+	
+	public Collection<Category> getCategories() {		
+		return getStockCategoryRoles().stream().map(scr -> scr.getCategory()).distinct().collect(Collectors.toSet());
+	}
+	
+	public Collection<Role> getRoles(Category category) {		
+		return getStockCategoryRoles().stream().filter(scr -> scr.getCategory().equals(category)).map(scr -> scr.getRole()).distinct().collect(Collectors.toSet());
 	}
 }

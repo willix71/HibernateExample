@@ -20,22 +20,6 @@ CREATE TABLE mkyongdb.category (
 INSERT INTO mkyongdb.category VALUES(10, 'CAT10', 'CATEGORY twenty');
 INSERT INTO mkyongdb.category VALUES(20, 'CAT20', 'zorglub');
 
-CREATE TABLE  mkyongdb.stock_category (
-  STOCK_CATEGORY_ID INT(10) PRIMARY KEY AUTO_INCREMENT,
-  STOCK_ID INT(10) NOT NULL,
-  CATEGORY_ID INT(10) NOT NULL,
-  CREATED_DATE DATE,
-  CREATED_BY VARCHAR(10) NOT NULL,
-  CONSTRAINT FK_CATEGORY_ID FOREIGN KEY (CATEGORY_ID) 
-             REFERENCES category (CATEGORY_ID),
-  CONSTRAINT FK_STOCK_ID FOREIGN KEY (STOCK_ID) 
-             REFERENCES stock (STOCK_ID)
-);
-
-INSERT INTO mkyongdb.stock_category VALUES(100, 1, 10, null, 'system');
-INSERT INTO mkyongdb.stock_category VALUES(101, 1, 20, null, 'system');
-INSERT INTO mkyongdb.stock_category VALUES(102, 2, 20, null, 'system');
-
 CREATE TABLE mkyongdb.role (
   ROLE_ID INT(10) PRIMARY KEY AUTO_INCREMENT,
   ROLE_NAME VARCHAR(20) NOT NULL
@@ -46,15 +30,20 @@ INSERT INTO mkyongdb.role VALUES(2, 'role2');
 INSERT INTO mkyongdb.role VALUES(3, 'role3');
 
 CREATE TABLE  mkyongdb.stock_category_role (
-  STOCK_CATEGORY_ID INT(10) NOT NULL,
+  STOCK_ID INT(10) NOT NULL,
+  CATEGORY_ID INT(10) NOT NULL,
   ROLE_ID INT(10) NOT NULL,
-  PRIMARY KEY (ROLE_ID,STOCK_CATEGORY_ID),
-  CONSTRAINT FK_STOCK_CATEGORY_ID FOREIGN KEY (STOCK_CATEGORY_ID) 
-             REFERENCES STOCK_CATEGORY (STOCK_CATEGORY_ID),
+  CREATED_DATE DATE,
+  CREATED_BY VARCHAR(10),
+  PRIMARY KEY (STOCK_ID,CATEGORY_ID,ROLE_ID),
+  CONSTRAINT FK_STOCK_ID FOREIGN KEY (STOCK_ID) 
+             REFERENCES STOCK (STOCK_ID),
+  CONSTRAINT FK_CATEGORY_ID FOREIGN KEY (CATEGORY_ID) 
+             REFERENCES CATEGORY (CATEGORY_ID),
   CONSTRAINT FK_ROLE_ID FOREIGN KEY (ROLE_ID) 
              REFERENCES role (ROLE_ID)
 );
 
-INSERT INTO mkyongdb.stock_category_role VALUES(100, 1);
-INSERT INTO mkyongdb.stock_category_role VALUES(100, 2);
-INSERT INTO mkyongdb.stock_category_role VALUES(101, 1);
+INSERT INTO mkyongdb.stock_category_role VALUES(1, 10, 1,null,null);
+INSERT INTO mkyongdb.stock_category_role VALUES(1, 10, 2,null,null);
+INSERT INTO mkyongdb.stock_category_role VALUES(1, 20, 1,null,null);

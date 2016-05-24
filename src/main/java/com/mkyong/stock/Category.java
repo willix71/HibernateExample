@@ -31,8 +31,8 @@ public class Category implements java.io.Serializable {
 	@Column(name = "description", nullable = false)
 	private String desc;
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy ="category", cascade=CascadeType.ALL)
-	private List<StockCategory> stockCategories = new ArrayList<StockCategory>(0);
+	@OneToMany(fetch = FetchType.LAZY, mappedBy ="pk.category", cascade=CascadeType.ALL)
+	private List<StockCategoryRole> stockCategoryRoles = new ArrayList<StockCategoryRole>(0);
 
 	public Category() {
 	}
@@ -42,10 +42,10 @@ public class Category implements java.io.Serializable {
 		this.desc = desc;
 	}
 
-	public Category(String name, String desc, List<StockCategory> stockCategories) {
+	public Category(String name, String desc, List<StockCategoryRole> stockCategoryRoles) {
 		this.name = name;
 		this.desc = desc;
-		this.stockCategories = stockCategories;
+		this.stockCategoryRoles = stockCategoryRoles;
 	}
 
 	public Integer getCategoryId() {
@@ -72,12 +72,12 @@ public class Category implements java.io.Serializable {
 	public void setDesc(String desc) {
 		this.desc = desc;
 	}
-	
-	public List<StockCategory> getStockCategories() {
-		return this.stockCategories;
+
+	public List<StockCategoryRole> getStockCategoryRoles() {
+		return stockCategoryRoles;
 	}
 
-	public void setStockCategories(List<StockCategory> stockCategories) {
-		this.stockCategories = stockCategories;
-	}
+	public void setStockCategoryRoles(List<StockCategoryRole> stockCategoryRoles) {
+		this.stockCategoryRoles = stockCategoryRoles;
+	}	
 }
