@@ -1,4 +1,4 @@
-package com.mkyong.stock;
+package com.accessright;
 
 import java.util.Date;
 
@@ -14,56 +14,62 @@ import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
 @Entity
-@Table(name = "stock_category_role", schema = "mkyongdb")
+@Table(name = "user_application_role", schema = "accessright")
 @AssociationOverrides({
-		@AssociationOverride(name = "pk.stock", 
-			joinColumns = @JoinColumn(name = "STOCK_ID")),
-		@AssociationOverride(name = "pk.category", 
-			joinColumns = @JoinColumn(name = "CATEGORY_ID")),
+		@AssociationOverride(name = "pk.application", 
+			joinColumns = @JoinColumn(name = "APPLICATION_ID")),
+		@AssociationOverride(name = "pk.user", 
+			joinColumns = @JoinColumn(name = "USER_ID")),
 		@AssociationOverride(name = "pk.role", 
 			joinColumns = @JoinColumn(name = "ROLE_ID"))
 		})
-public class StockCategoryRole implements java.io.Serializable {
+public class UserApplicationRole implements java.io.Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
 	@EmbeddedId
-	private StockCategoryRoleId pk = new StockCategoryRoleId();
+	private UserApplicationRoleId pk = new UserApplicationRoleId();
 
 	@Temporal(TemporalType.DATE)
-	@Column(name = "CREATED_DATE", nullable = false, length = 10)
+	@Column(name = "CREATED_DATE", nullable = true)
 	private Date createdDate;
 	
-	@Column(name = "CREATED_BY", nullable = false, length = 10)
+	@Column(name = "CREATED_BY", nullable = true, length = 10)
 	private String createdBy;
 	
-	public StockCategoryRole() {
+	public UserApplicationRole() {}
+	
+	public UserApplicationRole(User user, Application application, Role role) {
+		this.pk = new UserApplicationRoleId(user, application, role);
+		user.getUserApplicationRoles().add(this);
+		application.getUserApplicationRoles().add(this);
+		role.getUserApplicationRoles().add(this);
 	}
 
-	public StockCategoryRoleId getPk() {
+	public UserApplicationRoleId getPk() {
 		return pk;
 	}
 
-	public void setPk(StockCategoryRoleId pk) {
+	public void setPk(UserApplicationRoleId pk) {
 		this.pk = pk;
 	}
 
 	@Transient
-	public Stock getStock() {
-		return getPk().getStock();
+	public Application getApplication() {
+		return getPk().getApplication();
 	}
 
-	public void setStock(Stock stock) {
-		getPk().setStock(stock);
+	public void setApplication(Application application) {
+		getPk().setApplication(application);
 	}
 
 	@Transient
-	public Category getCategory() {
-		return getPk().getCategory();
+	public User getUser() {
+		return getPk().getUser();
 	}
 
-	public void setCategory(Category category) {
-		getPk().setCategory(category);
+	public void setUser(User user) {
+		getPk().setUser(user);
 	}
 
 	@Transient
@@ -95,7 +101,7 @@ public class StockCategoryRole implements java.io.Serializable {
 		if (o == null || getClass() != o.getClass())
 			return false;
 
-		StockCategoryRole that = (StockCategoryRole) o;
+		UserApplicationRole that = (UserApplicationRole) o;
 
 		if (getPk() != null ? !getPk().equals(that.getPk()): that.getPk() != null) return false;
 
@@ -104,5 +110,10 @@ public class StockCategoryRole implements java.io.Serializable {
 
 	public int hashCode() {
 		return (getPk() != null ? getPk().hashCode() : 0);
+	}
+
+	@Override
+	public String toString() {
+		return "UserApplicationRole [pk=" + pk + "]";
 	}
 }

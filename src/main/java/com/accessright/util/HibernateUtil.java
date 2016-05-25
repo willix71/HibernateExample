@@ -1,4 +1,4 @@
-package com.mkyong.util;
+package com.accessright.util;
  
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
