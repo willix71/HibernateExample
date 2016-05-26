@@ -1,18 +1,18 @@
 package com.accessright;
 
-import javax.persistence.Embeddable;
-import javax.persistence.ManyToOne;
+//import javax.persistence.Embeddable;
+//import javax.persistence.ManyToOne;
 
-@Embeddable
+//@Embeddable
 public class UserApplicationRoleId implements java.io.Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
-	@ManyToOne
+	//@ManyToOne
 	private Application application;
-	@ManyToOne
+	//@ManyToOne
 	private User user;
-	@ManyToOne
+	//@ManyToOne
 	private Role role;
     
 	public UserApplicationRoleId() {}

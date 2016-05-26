@@ -35,7 +35,7 @@ public class User implements java.io.Serializable {
 	@Column(name = "DESCRIPTION", nullable = false)
 	private String description;
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy ="pk.user", cascade=CascadeType.ALL)
+	@OneToMany(fetch = FetchType.LAZY, mappedBy ="user", cascade=CascadeType.ALL)
 	private List<UserApplicationRole> userApplicationRoles = new ArrayList<UserApplicationRole>(0);
 
 	public User() {

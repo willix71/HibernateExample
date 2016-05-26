@@ -32,7 +32,7 @@ public class Role implements java.io.Serializable {
 	@Column(name = "ROLE_NAME", unique = true, nullable = false, length = 10)
 	private String name;
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.role", cascade=CascadeType.ALL)
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "role", cascade=CascadeType.ALL)
 	private List<UserApplicationRole> userApplicationRoles = new ArrayList<UserApplicationRole>(0);
 	
 	public Role() {}

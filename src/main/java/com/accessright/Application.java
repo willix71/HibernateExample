@@ -39,7 +39,7 @@ public class Application implements java.io.Serializable {
 	@Column(name = "APPLICATION_NAME", unique = true, nullable = false, length = 20)
 	private String applicationName;
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.application", cascade=CascadeType.ALL)
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "application", cascade=CascadeType.ALL)
 	private List<UserApplicationRole> userApplicationRoles = new ArrayList<UserApplicationRole>(0);
 
 	public Application() {
