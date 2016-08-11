@@ -6,10 +6,7 @@ import org.hibernate.Session;
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.twoByTwo.Role;
-import com.twoByTwo.Stock;
-import com.twoByTwo.StockCategory;
-import com.twoByTwo.util.HibernateUtil;
+import common.utils.HibernateUtil;
 
 /**
  * Unit test for simple App.

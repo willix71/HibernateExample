@@ -13,11 +13,13 @@
 	</properties>
 	
 	<modules>
+		<module>common-utils</module>
 		<module>two-biRelationship</module>
 		<module>single-Relationship</module>
+		<module>multiple-eager-bags</module>
 	</modules>
 
-	<dependencies>
+	<dependencies>	
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>

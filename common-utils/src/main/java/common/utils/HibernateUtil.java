@@ -1,4 +1,4 @@
-package com.single.accessright.util;
+package common.utils;
  
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;

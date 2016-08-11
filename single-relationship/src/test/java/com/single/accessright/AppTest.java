@@ -7,11 +7,7 @@ import org.hibernate.Session;
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.single.accessright.Application;
-import com.single.accessright.Role;
-import com.single.accessright.User;
-import com.single.accessright.UserApplicationRole;
-import com.single.accessright.util.HibernateUtil;
+import common.utils.HibernateUtil;
 
 /**
  * Unit test for simple App.
