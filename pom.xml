@@ -1,20 +1,23 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.mkyong.common</groupId>
-	<artifactId>HibernateExample</artifactId>
-	<packaging>jar</packaging>
+	<groupId>w.example</groupId>
+	<artifactId>hibernate</artifactId>
+	<packaging>pom</packaging>
 	<version>1.0</version>
-	<name>HibernateExample</name>
-	<url>http://maven.apache.org</url>
+	<name>HibernateExamples</name>
 
 	<properties>
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<maven.compiler.source>1.8</maven.compiler.source>
 	</properties>
 	
-	<dependencies>
+	<modules>
+		<module>two-biRelationship</module>
+		<module>single-Relationship</module>
+	</modules>
 
+	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
@@ -34,14 +37,6 @@
 			<version>4.1.0.Final</version>
 		</dependency>
 
-		<!--
-		<dependency>
-			<groupId>javassist</groupId>
-			<artifactId>javassist</artifactId>
-			<version>3.12.1.GA</version>
-		</dependency> 
-		-->
-
 		<!-- logback logging framework-->
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
@@ -54,6 +49,5 @@
 			<artifactId>logback-classic</artifactId>
 			<version>0.9.28</version>
 		</dependency>
-
 	</dependencies>
 </project>
