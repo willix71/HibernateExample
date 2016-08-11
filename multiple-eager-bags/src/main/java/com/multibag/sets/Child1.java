@@ -26,6 +26,10 @@ public class Child1 {
 	@JoinColumn(name="Parent_ID")
     private Parent parent;
 
+	public Child1() {}
+	public Child1(String name) {this();this.name = name;}
+	public Child1(String name, Parent parent) {this(name);this.parent = parent;}
+
 	public Integer getId() {
 		return id;
 	}
@@ -50,6 +54,12 @@ public class Child1 {
 		this.parent = parent;
 	}
 
+	@Column(name = "INDEX_COL", nullable = false)
+	private Integer indexId;
+	public Integer getIndexId() {return indexId;}
+	public void setIndexId(Integer indexId) {this.indexId = indexId;}
+
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -57,7 +67,7 @@ public class Child1 {
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
-
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

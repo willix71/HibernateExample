@@ -5,6 +5,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 import java.util.ArrayList;
 import java.util.List;
 
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,6 +14,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.IndexColumn;
 
 @Entity
 @Table(name = "parent", schema = "multibag")
@@ -27,11 +30,18 @@ public class Parent {
 	private String name;
 	
 	@OneToMany(mappedBy="parent",cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@IndexColumn(name="INDEX_COL")
+	// or used Sets	
 	List<Child1> child1s = new ArrayList<Child1>();
 	
 	@OneToMany(mappedBy="parent",cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@IndexColumn(name="INDEX_COL")
+	// or used Sets
 	List<Child2> child2s = new ArrayList<Child2>();
 
+	public Parent() {}
+	public Parent(String name) {this.name = name;}
+	
 	public Integer getId() {return id;}
 	public void setId(Integer id) {this.id = id;}
 
@@ -40,7 +50,12 @@ public class Parent {
 
 	public List<Child1> getChild1s() {return child1s;}
 	public void setChild1s(List<Child1> child1s) {this.child1s = child1s;}
-
+	public void addChild1(Child1 child) {
+		this.child1s.add(child);
+		child.setParent(this);
+		child.setIndexId(child1s.size()-1);
+	}
+	
 	public List<Child2> getChild2s() {return child2s;}
 	public void setChild2s(List<Child2> child2s) {this.child2s = child2s;}
 
