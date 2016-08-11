@@ -17,6 +17,13 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.IndexColumn;
 
+/**
+ * Check http://blog.eyallupu.com/2010/06/hibernate-exception-simultaneously.html
+ * and http://www.jroller.com/eyallupu/entry/solving_simultaneously_fetch_multiple_bags
+ * 
+ * @author wkeyser
+ *
+ */
 @Entity
 @Table(name = "parent", schema = "multibag")
 public class Parent {
